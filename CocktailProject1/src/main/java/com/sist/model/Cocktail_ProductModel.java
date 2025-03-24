@@ -31,11 +31,15 @@ public class Cocktail_ProductModel {
 		String cno=request.getParameter("cno");
 		if(cno==null)
 			cno="1";
+		String sort=request.getParameter("sort");
+		if(sort==null || sort.trim().isEmpty())
+			sort="0";
 		int curpage=Integer.parseInt(page);
 		Map map=new HashMap();
 		map.put("start", (curpage*12)-11);
 		map.put("end",curpage*12);
 		map.put("cno", cno);
+		map.put("sort", sort);
 		List<Cocktail_ProductVO> list=Cocktail_ProductDAO.cocktail_productListData(map);
 		int totalpage=Cocktail_ProductDAO.cocktail_productTotalPage(map);
 		int totalcount=Cocktail_ProductDAO.cocktail_productTotalCount(map);
@@ -47,7 +51,7 @@ public class Cocktail_ProductModel {
 		if(endPage>totalpage)
 			endPage=totalpage;
 		
-		// 카테고리별로 나누기
+		// 카테고리별 랜덤 데이터
 		Cocktail_ProductVO vo=Cocktail_ProductDAO.cocktail_productCnoRandomData(map);
 		List<Cocktail_ProductVO> rList=Cocktail_ProductDAO.cocktail_productCnoRandomData12(map);
 		
@@ -79,7 +83,26 @@ public class Cocktail_ProductModel {
 			cList4.add(cList.subList(i, end));
 		}
 		
+		Map<String, Object> priceRange = Cocktail_ProductDAO.cocktail_productPriceData(map);
+		int minPrice = 0;
+		int maxPrice = 0;
+		if(priceRange != null) {
+		    if(priceRange.get("minPrice") != null) {
+		       minPrice = Integer.parseInt(priceRange.get("minPrice").toString());
+		    }
+		    if(priceRange.get("maxPrice") != null) {
+		       maxPrice = Integer.parseInt(priceRange.get("maxPrice").toString());
+		    }
+		}
 		
+		switch(sort) {
+		    case "1":
+		        list.sort(Comparator.comparingInt(Cocktail_ProductVO::getPriceInt));
+		        break;
+		    case "2":
+		        list.sort(Comparator.comparingInt(Cocktail_ProductVO::getPriceInt).reversed());
+		        break;
+		}
 		
 		request.setAttribute("cList", cList);
 		request.setAttribute("cList4", cList4);
@@ -89,6 +112,9 @@ public class Cocktail_ProductModel {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("totalcount", totalcount);
+		request.setAttribute("sort", sort);
+		request.setAttribute("minPrice", minPrice);
+	    request.setAttribute("maxPrice", maxPrice);
 		request.setAttribute("main_jsp", "../cocktail_product/cocktail_product_list.jsp");
 		return "../main/main.jsp";
 	}

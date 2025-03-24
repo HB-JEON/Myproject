@@ -86,4 +86,14 @@
     )
     WHERE rownum&lt;=12
   </select>
+  <select id="cocktail_productPriceData" resultType="map" parameterType="hashmap">
+    SELECT MIN(TO_NUMBER(REGEXP_REPLACE(price, '[^0-9]', ''))) AS minPrice,
+           MAX(TO_NUMBER(REGEXP_REPLACE(price, '[^0-9]', ''))) AS maxPrice
+    FROM cocktail_product
+    <where>
+      <if test="cno != null">
+        AND cno=#{cno}
+      </if>
+    </where>
+  </select>
 </mapper>

@@ -16,6 +16,33 @@
 }
 
 </style>
+<script type="text/javascript">
+function formatNumber(num) {
+	return Number(num).tolocalString('kr-KR')+"원"
+}
+$(function(){
+	var minVal=$(".price-range").data("minPrice")
+	var maxVal=$(".price-range").data("maxPrice")
+	
+	$(".price-range").slider({
+            range: true,
+            min: minVal,
+            max: maxVal,
+            values: [minVal, maxVal],
+            slide: function(event, ui) {
+                $("#minamount").val(formatNumber(ui.values[0]))
+                $("#maxamount").val(formatNumber(ui.values[1]))
+                $("#hiddenMinPrice").val(ui.values[0])
+                $("#hiddenMaxPrice").val(ui.values[1])
+            }
+	})
+	
+	$("#minamount").val(formatNumber($(".price-range").slider("values", 0)))
+    $("#maxamount").val(formatNumber($(".price-range").slider("values", 1)))
+    $("#hiddenMinPrice").val($(".price-range").slider("values", 0))
+    $("#hiddenMaxPrice").val($(".price-range").slider("values", 1))
+})
+</script>
 </head>
 <body>
 <!-- Hero Section Begin -->
@@ -120,7 +147,7 @@
                         </ul>
                     </div>
                     <div class="sidebar__item">
-                        <h4>가격대</h4>
+                        <h4>가격</h4>
                         <div class="price-range-wrap">
                             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                 data-min="10000" data-max="3000000">
@@ -130,8 +157,8 @@
                             </div>
                             <div class="range-slider">
                                 <div class="price-input">
-                                    <input type="text" id="minamount" value="₩10,000">
-                                    <input type="text" id="maxamount" value="₩3,000,000">
+                                    <input type="text" id="minamount">
+                                    <input type="text" id="maxamount">
                                 </div>
                             </div>
                         </div>
@@ -196,12 +223,15 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-5">
                             <div class="filter__sort">
-                                <span>Sort By</span>
-                                <select>
-                                    <option value="0">Default</option>
-                                    <option value="1">Price Low to High</option>
-                                    <option value="2">Price High to Low</option>
-                                </select>
+                                <form method="GET" action="cocktail_product_list.do" id="sortForm">
+								   <input type="hidden" name="cno" value="${cno}"/>
+								    <input type="hidden" name="page" value="${curpage}"/>
+								      <select name="sort" onchange="document.getElementById('sortForm').submit()" style="padding:5px;">
+								         <option value="0" <c:if test="${sort == '0'}">selected</c:if>>Default</option>
+								         <option value="1" <c:if test="${sort == '1'}">selected</c:if>>Low to High</option>
+								         <option value="2" <c:if test="${sort == '2'}">selected</c:if>>Price High to Low</option>
+								      </select>
+								 </form>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
@@ -242,13 +272,13 @@
                 <div class="product__pagination">
                     <ul class="pagination">
                         <c:if test="${startPage>1 }">
-                        <a href="../cocktail_product/cocktail_product_list.do?cno=${cno }&page=${startPage-1 }"><i class="fa fa-long-arrow-left"></i></a>
+                        <a href="../cocktail_product/cocktail_product_list.do?cno=${cno }&page=${startPage-1 }&sort=${sort }"><i class="fa fa-long-arrow-left"></i></a>
                         </c:if>
                         <c:forEach var="i" begin="${startPage }" end="${endPage }">
-                        <a class="${i==curpage?'active':'' }" href="../cocktail_product/cocktail_product_list.do?cno=${cno }&page=${i }">${i }</a>
+                        <a class="${i==curpage?'active':'' }" href="../cocktail_product/cocktail_product_list.do?cno=${cno }&page=${i }&sort=${sort }">${i }</a>
                         </c:forEach>
                         <c:if test="${endPage<totalpage }">
-                        <a href="../cocktail_product/cocktail_product_list.do?cno=${cno }&page=${endPage+1 }"><i class="fa fa-long-arrow-right"></i></a>
+                        <a href="../cocktail_product/cocktail_product_list.do?cno=${cno }&page=${endPage+1 }&sort=${sort }"><i class="fa fa-long-arrow-right"></i></a>
                         </c:if>
                     </ul>
                 </div>

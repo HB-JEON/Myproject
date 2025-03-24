@@ -130,8 +130,8 @@ let jsonRecommendView=(json) => {
 	    +'</div>'
 	    })
 	    
-	    html += '    </div>'
-	    html += '  </div>'
+	    html += '</div>'
+	    html += '</div>'
 	    html += '</div>'
 	    $('#recommend').html(html)
 	}
