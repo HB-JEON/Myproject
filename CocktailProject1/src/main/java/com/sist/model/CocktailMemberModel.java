@@ -50,6 +50,7 @@ public class CocktailMemberModel {
 		   }catch(Exception ex) 
 		   {
 			   ex.printStackTrace();
+			   
 		   }
 		   
 	   }
@@ -73,8 +74,7 @@ public class CocktailMemberModel {
 		   String coment=request.getParameter("coment");
 		   String avatar=request.getParameter("avatar");
 		   
-		   CocktailMemberVO vo=new CocktailMemberVO
-				   ();
+		   CocktailMemberVO vo=new CocktailMemberVO();
 		   vo.setId(id);
 		   vo.setPwd(pwd);
 		   vo.setName(name);
@@ -122,6 +122,7 @@ public class CocktailMemberModel {
 			   session.setAttribute("id", vo.getId());
 			   session.setAttribute("name", vo.getName());
 			   session.setAttribute("sex", vo.getSex());
+			   session.setAttribute("email", vo.getEmail());
 			   session.setAttribute("admin", vo.getAdmin());
 			   session.setAttribute("post", vo.getPost());
 			   session.setAttribute("address", vo.getAddress());
@@ -136,6 +137,7 @@ public class CocktailMemberModel {
 		   }catch(Exception ex) 
 		   {
 			   ex.printStackTrace();
+			   
 		   }
 	   }
 	// 로그아웃 
@@ -148,4 +150,3 @@ public class CocktailMemberModel {
 		   return "redirect:../main/main.do";
 	   }
 	}
-

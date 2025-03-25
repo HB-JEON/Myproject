@@ -14,27 +14,7 @@ public class Cocktail_ProductDAO {
 	{
 		ssf=CreateSqlSessionFactory.getSsf();
 	}
-	/*
-	     <select id="cocktail_productListData" resultType="Cocktail_ProductVO" parameterType="hashmap">
-		   SELECT product_no, name, type, price, poster, deliver, alc, volmn, loc, content, cno, hit, delivery_fee, num
-		   FROM (SELECT product_no, name, type, price, poster, deliver, alc, volmn, loc, content, cno, hit, delivery_fee ,rownum as num 
-		   FROM (SELECT + INDEX_ASC(cocktail_product c_prod_product_no_pk) product_no, name, type, price, poster, deliver, alc, volmn, loc, content, cno, hit, delivery_fee
-		   FROM cocktail_product))
-		   WHERE num BETWEEN #{start} AND #{end}
-		</select>
-		  <select id="cocktail_productTotalPage" resultType="int">
-		   SELECT CEIL(COUNT(*)/12.0) FROM cocktail_product
-		</select>
-		<select id="cocktail_productDetailData" resultType="Cocktail_ProductVO" parameterType="int">
-		    SELECT * FROM cocktail_product
-		    WHERE product_no=#{product_no}
-		</select>
-		<update id="cocktail_productHitIncrement" parameterType="int">
-		    UPDATE cocktail_product SET
-		    hit=hit+1
-		    WHERE product_no=#{product_no}
-		</update>
-	 */
+	
 	public static List<Cocktail_ProductVO> cocktail_productListData(Map map)
 	{
 		SqlSession session=ssf.openSession();
