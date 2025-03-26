@@ -12,6 +12,9 @@
 	
 }
 </style>
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
     <!-- Breadcrumb Section Begin -->
@@ -72,7 +75,11 @@
                         </div>
                         <c:if test="${sessionScope.id!=null }">
                         <a href="../jjim/jjim_insert.do?rno=${vo.product_no }&type=1" class="heart-icon"><span class="icon_heart_alt"></span></a>
-                        <a href="#" class="heart-icon"><span class="icon_cart_alt"></span></a>
+                        <form method="post" action="../cart/cart_insert.do" class="heart-icon">
+                         <input type="hidden" name="product_no" value="${vo.product_no }">
+                         <input type="hidden" name="price" value="${vo.price }">
+                         <button type="submit" class="icon_cart_alt" style="background: none; border: none;"></button>
+                        </form>
                         <a href="#" class="primary-btn">구매하기</a>
                         </c:if>
                         <a href="javascript:history.back()" class="primary-btn">목록</a>

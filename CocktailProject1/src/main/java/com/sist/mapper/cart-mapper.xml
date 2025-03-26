@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.cart-mapper">
   <resultMap type="CartVO" id="cartMap">
-  	<result property=""/>
     <result property="cpvo.name" column="name"/>
     <result property="cpvo.poster" column="poster"/>
     <result property="cpvo.price" column="price"/>
