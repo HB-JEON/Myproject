@@ -109,7 +109,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                   <td class="shoping__cart__total">${vo.cpvo.price vo.account }</td>
+                                   <td class="shoping__cart__total">${vo.cpvo.price }${vo.account }</td>
                                    <td class="shoping__cart__item__close">
                                       <a href="cart/cart_delete.do?cno=${cart.cno}" onclick="return confirm('삭제하시겠습니까?');">
                                        <span class="icon_close"></span>

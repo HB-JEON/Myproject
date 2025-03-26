@@ -11,20 +11,21 @@
   
   <insert id="cartInsert" parameterType="CartVO">
     INSERT INTO cart VALUES(
-      cart_cno_seq.nextval,#{product_no}, #{id}, #{account}, #{price}, 'y', SYSDATE
+      cart_cno_seq.nextval,#{pno}, #{id}, #{account}, #{price}, 'y', SYSDATE
     )
   </insert>
   
   <insert id="buyInsert" parameterType="CartVO">
     INSERT INTO cart VALUES(
-      cart_cno_seq.nextval, #{product_no}, #{id}, #{account}, #{price}, 'y', SYSDATE
+      cart_cno_seq.nextval, #{pno}, #{id}, #{account}, #{price}, 'y', SYSDATE
     )
   </insert>
   
   <select id="cartListData" resultMap="cartMap" parameterType="string">
     SELECT cno, name, poster, price, account
-    FROM cart c, cocktail_product cp
-    WHERE c.pno=cp.product_no
+    FROM cart c
+    JOIN cocktail_product cp
+    ON c.pno=cp.product_no
     AND id=#{id} AND isbuy='y'
     ORDER BY cno DESC
   </select>
@@ -32,7 +33,7 @@
   <update id="cartUpdate" parameterType="CartVO">
     UPDATE cart SET
     account=account+#{account}
-    WHERE product_no=#{product_no} AND id=#{id}
+    WHERE pno=#{pno} AND id=#{id}
   </update>
   
   <select id="cartCount" resultType="int" parameterType="CartVO">

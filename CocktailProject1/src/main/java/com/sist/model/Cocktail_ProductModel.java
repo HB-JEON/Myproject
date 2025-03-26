@@ -148,13 +148,17 @@ public class Cocktail_ProductModel {
 		{
 		String product_no=request.getParameter("product_no");
 		String cno=request.getParameter("cno");
-		
+		int priceInt=0;
 		
 		Cocktail_ProductVO vo=Cocktail_ProductDAO.cocktail_productDetailData(Integer.parseInt(product_no));
-		
 		int rcno=Integer.parseInt(cno);
 		List<Cocktail_ProductVO> rList4=Cocktail_ProductDAO.cocktail_productCnoRandomData4(rcno);
 		
+		String price=vo.getPrice();
+	    price=price.replaceAll("[^0-9]", "");
+	    vo.setPriceInt(Integer.parseInt(price));
+		
+		request.setAttribute("product_no", product_no);
 		request.setAttribute("cno", cno);
 		request.setAttribute("vo", vo);
 		request.setAttribute("rList4", rList4);

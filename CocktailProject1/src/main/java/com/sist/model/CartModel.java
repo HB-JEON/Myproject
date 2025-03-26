@@ -21,7 +21,7 @@ public class CartModel {
 		String price=request.getParameter("price");
 		
 		if (pno == null || account == null || price == null ||
-		        pno.trim().isEmpty() || account.trim().isEmpty() || price.trim().isEmpty()) {
+				pno.trim().isEmpty() || account.trim().isEmpty() || price.trim().isEmpty()) {
 		        System.out.println("필수 파라미터 누락: pno=" + pno + ", account=" + account + ", price=" + price);
 		        request.setAttribute("error", "필수 파라미터가 누락되었습니다.");
 		    }
@@ -32,7 +32,7 @@ public class CartModel {
 		CartVO vo=new CartVO();
 		vo.setAccount(Integer.parseInt(account));
 		vo.setPno(Integer.parseInt(pno));
-		vo.setPrice(Integer.parseInt(price));
+		vo.setPriceInt(Integer.parseInt(price));
 		vo.setId(id);
 		
 		if (id == null || id.trim().isEmpty()) {
@@ -43,7 +43,7 @@ public class CartModel {
 		
 		CartDAO.cartInsert(vo);
 		
-		return "redirect: ../cart/cart_list.jsp";
+		return "../cart/cart_list.jsp";
 	}
 	
 	@RequestMapping("cart/cart_delete.do")
@@ -67,13 +67,13 @@ public class CartModel {
 		String id=(String)session.getAttribute("id");
 		
 		
-		CartVO vo=new CartVO();
-		vo.setAccount(Integer.parseInt(account));
-		vo.setPno(Integer.parseInt(pno));
-		vo.setPrice(Integer.parseInt(price));
-		vo.setId(id);
-		
-		CartDAO.buyInsert(vo);
+//		CartVO vo=new CartVO();
+//		vo.setAccount(Integer.parseInt(account));
+//		vo.setPno(Integer.parseInt(pno));
+//		vo.setPrice(Integer.parseInt(price));
+//		vo.setId(id);
+//		
+//		CartDAO.buyInsert(vo);
 		
 		return "redirect: ../cart/buy.jsp";
 	}
