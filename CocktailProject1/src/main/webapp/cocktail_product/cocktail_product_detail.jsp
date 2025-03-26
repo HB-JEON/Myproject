@@ -196,12 +196,11 @@ $(function(){
                         <a href="../jjim/jjim_insert.do?rno=${vo.product_no }&type=1" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <form method="post" action="../cart/cart_insert.do" class="heart-icon" id="frm">
                          <input type="hidden" name="pno" value="${product_no }">
+                         <input type="hidden" name="poster" value="${vo.poster }">
+                         <input type="hidden" name="name" value="${vo.name }">
                          <input type="hidden" name="price" value="${vo.price }">
-                         <input type="hidden" name="account" value="${account }">
-                         <input type="hidden" name="" value="">
-                         <input type="hidden" name="" value="">
-                         <input type="hidden" name="" value="">
-                         <input type="hidden" name="" value="">
+                         <input type="hidden" name="account" value="1">
+                         <input type="hidden" name="total-price" value="${vo.priceInt }">
                          <button type="submit" class="icon_cart_alt" style="background: none; border: none;"></button>
                         </form>
                         <a href="#" class="primary-btn">구매하기</a>
