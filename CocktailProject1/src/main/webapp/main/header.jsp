@@ -18,7 +18,7 @@
             <ul>
             <c:if test="${sessionScope.id!=null }">
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li><a href="../cart/cart_list.do"><i class="fa fa-shopping-bag"></i></a></li>
               </c:if>
             </ul>
         </div>
@@ -68,11 +68,11 @@
                                 </ul>
                             </li>
                             <c:if test="${sessionScope.id!=null }">
-                            <c:if test="${sessionScope.admin='n' }">
-                            <li><a href="./contact.html">마이페이지</a></li>
+                            <c:if test="${sessionScope.admin=='n' }">
+                            <li><a href="../mypage/my_main.do">마이페이지</a></li>
                             </c:if>
-                            <c:if test="${sessionScope.admin='y' }">
-                            <li><a href="./contact.html">관리자페이지</a></li>
+                            <c:if test="${sessionScope.admin=='y' }">
+                            <li><a href="../adminpage/admin_main.do">관리자페이지</a></li>
                             </c:if>
                             </c:if>
                         </ul>
@@ -82,7 +82,7 @@
         <div class="humberger__menu__contact">
             <ul>
             <c:if test="${sessionScope.id!=null }">
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                <li><i class="fa fa-envelope"></i> ${sessionScope.email}&nbsp;&nbsp;</li>
                 <li>Free Shipping for all Order of $99</li>
               </c:if>
             </ul>
@@ -99,8 +99,10 @@
                         <div class="header__top__left">
                             <ul>
                             <c:if test="${sessionScope.id!=null }">
-                                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                                <li>Free Shipping for all Order of $99</li>
+                                <li><i class="fa fa-envelope"></i> ${sessionScope.email}&nbsp;&nbsp;</li>
+                                <li>${sessionScope.name}(${sessionScope.admin eq 'y' ? "관리자":"회원" })님 환영합니다.❤️&nbsp;&nbsp;</li>
+                                <!-- ${sessionScope.name}
+                                	<c:if test="${sessionScope.admin eq 'y'}">(관리자)</c:if> == 관리자만 표시 -->
                               </c:if>
                             </ul>
                         </div>
@@ -109,9 +111,14 @@
                         <div class="header__top__right">
             
                             <div class="header__top__right__auth" style="display:flex; flex-direction: row; justify-content:end">
+                            	<c:if test="${sessionScope.id==null }">
                                 <a href="../member/login.do"><i class="fa fa-user"></i> 로그인</a>
                                  <span>/</span>
                                 <a href="../member/join.do">회원가입</a>
+                                </c:if>
+                                <c:if test="${sessionScope.id!=null }">
+                                <a href="../member/logout.do" class="btn btn-outline-danger">로그아웃</a>
+                                </c:if>
                             </div>
                         </div>
                     </div>
@@ -139,7 +146,7 @@
                             <li><a href="#">칵테일바</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="../cocktailbar/cocktailbar_list.do">칵테일바 목록</a></li>
-                                    <li><a href="#">칵테일바 관리</a></li>
+                                    <li><a href="../cocktailbar/cocktailbar_find.do">칵테일바 검색</a></li>
                                     <c:if test="${sessionScope.id!=null }">
                                     <li><a href="#">칵테일바 예약</a></li>
                                     </c:if>
@@ -149,7 +156,7 @@
                                 <ul class="header__menu__dropdown">
                                     <li><a href="../cocktail_product/cocktail_product_list.do">주류상품 목록</a></li>
                                     <li><a href="../product2/product_list.do">칵테일용품 목록</a></li>
-                                    <li><a href="../cocktail_product/cocktail_product_find.do">주류상품 검색</a></li>
+                                    <li><a href="./shoping-cart.html">주류상품 검색</a></li>
                                     <li><a href="../product2/product_find.do">칵테일용품 검색</a></li>
                                 </ul>
                             </li>
@@ -165,10 +172,12 @@
                             </li>
                             <c:if test="${sessionScope.id!=null }">
                             <c:if test="${sessionScope.admin=='n' }">
-                            <li><a href="#">마이페이지</a></li>
+                             <li><a href="../mypage/my_main.do">마이페이지</a>
+
                             </c:if>
                             <c:if test="${sessionScope.admin=='y' }">
-                            <li><a href="#">관리자페이지</a></li>
+                            <li><a href="../adminpage/admin_main.do">관리자페이지</a>
+
                             </c:if>
                             </c:if>
                         </ul>
@@ -179,7 +188,7 @@
                         <ul>
                         	<c:if test="${sessionScope.id!=null }">
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="../cart/cart_list.do"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                           </c:if>
                         </ul>
                     </div>

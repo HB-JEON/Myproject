@@ -149,4 +149,5 @@ public class CocktailMemberModel {
 		   session.invalidate();
 		   return "redirect:../main/main.do";
 	   }
+	    
 	}

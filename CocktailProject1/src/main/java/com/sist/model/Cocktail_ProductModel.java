@@ -157,6 +157,7 @@ public class Cocktail_ProductModel {
 		String price=vo.getPrice();
 	    price=price.replaceAll("[^0-9]", "");
 	    vo.setPriceInt(Integer.parseInt(price));
+	    
 		
 		request.setAttribute("product_no", product_no);
 		request.setAttribute("cno", cno);
